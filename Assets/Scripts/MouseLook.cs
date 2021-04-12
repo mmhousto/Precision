@@ -8,7 +8,6 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 1000f;
 
     public Transform playerBody;
-    public Transform bow;
 
     float xRotation = 0f;
 
@@ -23,9 +22,8 @@ public class MouseLook : MonoBehaviour
         float pitch = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= pitch;
-        xRotation = Mathf.Clamp(xRotation, -23f, 45f);
+        xRotation = Mathf.Clamp(xRotation, -75f, 55f);
         
-
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * yaw);
     }

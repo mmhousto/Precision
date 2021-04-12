@@ -5,15 +5,125 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    private float playerSpeed = 1.0f;
+    private float jumpHeight = 1.0f;
+    private float gravityValue = -9.81f; 
+    private Animator anim;
+
     // Start is called before fthe first frame update
     void Start()
     {
-
+        controller = gameObject.GetComponent<CharacterController>(); //gets objects CC
+        anim = gameObject.GetComponent<Animator>(); //gets objects Animator
     }
 
     // Update is called once per frame
     void Update()
     {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        anim.SetFloat("vert", v); //sets Float values to players horizontal and vertical input.
+        anim.SetFloat("horz", h);
 
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+
+        //left and right
+        if (groundedPlayer && Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))//running
+        {
+            anim.SetBool("Running", true);
+            Debug.Log(h);
+            playerSpeed = 5.0f;
+            Vector3 move = new Vector3(h, 0, 0);
+            if (h > 0)
+            {
+                move = transform.TransformDirection(Vector3.right) * playerSpeed;//moves player to right/left in direction he is facing
+            }else if (h < 0)
+            {
+                move = transform.TransformDirection(-Vector3.right) * playerSpeed;//moves player to right/left in direction he is facing
+            }
+            
+            controller.Move(move * Time.deltaTime);
+        } else if (groundedPlayer && Input.GetButton("Horizontal"))
+        {
+            anim.SetBool("Running", false);
+            Debug.Log(h);
+            Vector3 move = new Vector3(h, 0, 0);
+            if (h > 0)
+            {
+                move = transform.TransformDirection(Vector3.right) * playerSpeed;//moves player to right/left in direction he is facing
+            }
+            else if (h < 0)
+            {
+                move = transform.TransformDirection(-Vector3.right) * playerSpeed;//moves player to right/left in direction he is facing
+            }
+
+            controller.Move(move * Time.deltaTime);
+        }
+
+        //forward/back
+        if (groundedPlayer && Input.GetButton("Vertical") && Input.GetKey(KeyCode.LeftShift))//running
+        {
+            anim.SetBool("Running", true);
+            Debug.Log(v);
+            playerSpeed = 5.0f;
+            Vector3 move = new Vector3(0, 0, v);
+            if (v > 0)
+            {
+                move = transform.TransformDirection(Vector3.forward) * playerSpeed;//moves player forward in direction he is facing
+
+            }
+            else if (v < 0)
+            {
+                move = transform.TransformDirection(-Vector3.forward) * playerSpeed;//moves player back in direction he is facing
+            }
+            controller.Move(move * Time.deltaTime); //moves player
+            //gameObject.transform.forward = move;
+        } else if (groundedPlayer && Input.GetButton("Vertical"))
+        {
+            anim.SetBool("Running", false);
+            Debug.Log(v);
+            playerSpeed = 1.0f;
+            Vector3 move = new Vector3(0, 0, v);
+            if (v > 0)
+            {
+                move = transform.TransformDirection(Vector3.forward) * playerSpeed;//moves player forward in direction he is facing
+
+            }
+            else if (v < 0)
+            {
+                move = transform.TransformDirection(-Vector3.forward) * playerSpeed;//moves player back in direction he is facing
+            }
+            controller.Move(move * Time.deltaTime); //moves player
+            //gameObject.transform.forward = move;
+        }
+
+        if(Input.GetKeyUp("left shift"))
+        {
+            anim.SetBool("Running", false);
+        }
+
+
+
+        /*if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }*/
+
+        // Changes the height position of the player..
+        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 }

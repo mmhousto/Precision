@@ -11,18 +11,38 @@ public class PlayerController : MonoBehaviour
     private float playerSpeed = 1.0f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f; 
-    private Animator anim;
+    private static Animator anim;
+    private bool isdrawn;
 
     // Start is called before fthe first frame update
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>(); //gets objects CC
         anim = gameObject.GetComponent<Animator>(); //gets objects Animator
+        isDrawn = false;
     }
+
+    public static bool isDrawn{ get; set; }
+
+    public static void setShot1()
+    {
+        anim.SetInteger("Shot", 1);
+    }
+
+    public static void setShot0()
+    {
+        anim.SetInteger("Shot", 0);
+    }
+
+
 
     // Update is called once per frame
     void Update()
     {
+        //if (anim.GetInteger("Shot") == 1)
+        //{
+         //   anim.SetInteger("Shot", 0);
+        //}
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         anim.SetFloat("vert", v); //sets Float values to players horizontal and vertical input.
@@ -31,7 +51,20 @@ public class PlayerController : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
-            playerVelocity.y = 0f;
+            playerVelocity.y = -1f;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (isDrawn == false)
+            {
+                anim.SetBool("Draw", true);
+                isDrawn = true;
+            } else if (isDrawn == true) 
+            {
+                anim.SetBool("Draw", false);
+                isDrawn = false;
+            }
         }
 
 
@@ -39,8 +72,9 @@ public class PlayerController : MonoBehaviour
         if (groundedPlayer && Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))//running
         {
             anim.SetBool("Running", true);
+            anim.SetBool("Draw", false);
             Debug.Log(h);
-            playerSpeed = 5.0f;
+            playerSpeed = 2.5f;
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
             {
@@ -72,6 +106,7 @@ public class PlayerController : MonoBehaviour
         if (groundedPlayer && Input.GetButton("Vertical") && Input.GetKey(KeyCode.LeftShift))//running
         {
             anim.SetBool("Running", true);
+            anim.SetBool("Draw", false);
             Debug.Log(v);
             playerSpeed = 5.0f;
             Vector3 move = new Vector3(0, 0, v);

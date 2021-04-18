@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
+            isDrawn = false;
             Debug.Log(h);
             playerSpeed = 2.5f;
             Vector3 move = new Vector3(h, 0, 0);
@@ -107,6 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
+            isDrawn = false;
             Debug.Log(v);
             playerSpeed = 5.0f;
             Vector3 move = new Vector3(0, 0, v);

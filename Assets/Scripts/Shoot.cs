@@ -9,23 +9,35 @@ public class Shoot : MonoBehaviour
     public Camera fpsCam;
     public Transform arrowSpawn;
     public float shootForce = 20f;
+    private float shotTimer = 1.5f;
+    private float timer;
+    private bool canFire = true;
 
-    // Start is called before fthe first frame update
+    // Start is called before the first frame update
     void Start()
     {
-
+        timer = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && PlayerController.isDrawn == true)
+        // shot timer
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
         {
+            timer = 0f;
+            canFire = true;
+        } else
+        {
+            canFire = false;
+        }
+
+        if (Input.GetMouseButtonDown(0) && PlayerController.isDrawn == true && canFire == true)
+        {
+            timer = shotTimer;
             PlayerController.setShot1();
             GameObject clone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.rotation) as GameObject;
-            //clone.transform.position = arrowSpawn.position;
-            //clone.transform.rotation = transform.rotation;
-            //clone.transform.right = fpsCam.transform.forward;
             Rigidbody rb = clone.GetComponent<Rigidbody>();
             rb.velocity = fpsCam.transform.forward * shootForce;
         }

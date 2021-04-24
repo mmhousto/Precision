@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour
     public Camera fpsCam;
     public Transform arrowSpawn;
     public float shootForce = 20f;
-    private float shotTimer = 1.5f;
+    private float shotTimer = 1.7f;
     private float timer;
     private bool canFire = true;
 

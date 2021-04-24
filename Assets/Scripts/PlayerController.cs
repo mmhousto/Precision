@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float playerSpeed = 1.0f;
-    private float jumpHeight = 1.0f;
+    private float playerSpeed = 2.0f;
+    private float jumpHeight = 2.0f;
     private float gravityValue = -9.81f; 
     private static Animator anim;
     private bool isdrawn;
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
+            anim.SetBool("inAir", false);
             playerVelocity.y = -1f;
         }
 
@@ -69,13 +70,13 @@ public class PlayerController : MonoBehaviour
 
 
         //left and right
-        if (groundedPlayer && Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))//running
+        if (Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))//running
         {
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
             isDrawn = false;
             Debug.Log(h);
-            playerSpeed = 2.5f;
+            playerSpeed = 5f;
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
             {
@@ -86,9 +87,10 @@ public class PlayerController : MonoBehaviour
             }
             
             controller.Move(move * Time.deltaTime);
-        } else if (groundedPlayer && Input.GetButton("Horizontal"))
+        } else if (Input.GetButton("Horizontal"))
         {
             anim.SetBool("Running", false);
+            playerSpeed = 2.0f;
             Debug.Log(h);
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //forward/back
-        if (groundedPlayer && Input.GetButton("Vertical") && Input.GetKey(KeyCode.LeftShift))//running
+        if (Input.GetButton("Vertical") && Input.GetKey(KeyCode.LeftShift))//running
         {
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
@@ -123,11 +125,11 @@ public class PlayerController : MonoBehaviour
             }
             controller.Move(move * Time.deltaTime); //moves player
             //gameObject.transform.forward = move;
-        } else if (groundedPlayer && Input.GetButton("Vertical"))
+        } else if (Input.GetButton("Vertical"))
         {
             anim.SetBool("Running", false);
             Debug.Log(v);
-            playerSpeed = 1.0f;
+            playerSpeed = 2.0f;
             Vector3 move = new Vector3(0, 0, v);
             if (v > 0)
             {
@@ -158,8 +160,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            anim.SetBool("inAir", true);
         }
-
+        
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }

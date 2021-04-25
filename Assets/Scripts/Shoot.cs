@@ -22,7 +22,7 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // shot timer
+        // Shot timer
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
@@ -33,17 +33,20 @@ public class Shoot : MonoBehaviour
             canFire = false;
         }
 
+        // Shoot Arrow
         if (Input.GetMouseButtonDown(0) && PlayerController.isDrawn == true && canFire == true)
         {
-            timer = shotTimer;
-            PlayerController.setShot1();
-            GameObject clone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.rotation) as GameObject;
-            Rigidbody rb = clone.GetComponent<Rigidbody>();
-            rb.velocity = fpsCam.transform.forward * shootForce;
+            timer = shotTimer; // reset timer
+            PlayerController.setShot1(); // activates animation
+            GameObject clone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.rotation) as GameObject; // spawns arrow
+            Rigidbody rb = clone.GetComponent<Rigidbody>(); // gets Rigidbody of cloned arrow
+            rb.velocity = fpsCam.transform.forward * shootForce; // applies velocity to it in direction facing
+            clone.transform.rotation = Quaternion.LookRotation(rb.velocity); // adds arc to arrow
+            Physics.IgnoreCollision(clone.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>()); // ignore collision w/ player
         }
         if (Input.GetMouseButtonUp(0))
         {
-            PlayerController.setShot0();
+            PlayerController.setShot0(); // ends animation
         }
 
     }

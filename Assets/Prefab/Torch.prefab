@@ -81,6 +81,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2113576257631387630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839706990830271611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1 &7826895561546446085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5040,6 +5053,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 296ffc02e5984c742942c8e9fcdb661e, type: 3}
+--- !u!1 &2839706990830271611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5131706282928135802, guid: 296ffc02e5984c742942c8e9fcdb661e, type: 3}
+  m_PrefabInstance: {fileID: 6944499887131320833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6608996648842025905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4316716414272158128, guid: 296ffc02e5984c742942c8e9fcdb661e, type: 3}

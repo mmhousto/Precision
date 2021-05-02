@@ -4,7 +4,7 @@
 o 
 
 # material
-mtllib Archery Target.mtl
+mtllib Target.mtl
 usemtl palette
 
 # normals

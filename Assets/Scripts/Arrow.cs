@@ -5,11 +5,12 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     Rigidbody arrowRB;
+    //Animator anim;
     private float lifeTimer = 6f;
     private float timer;
     private bool hit;
-    Animator anim;
-    private float rotateZ;
+    float rotationSpeed = 45;
+    Vector3 eulerAngleVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -17,24 +18,23 @@ public class Arrow : MonoBehaviour
         timer = lifeTimer;
         arrowRB = GetComponent<Rigidbody>();
         hit = false;
+
+        //Set the angular velocity of the Rigidbody (rotating around the Y axis, 100 deg/sec)
+        eulerAngleVelocity = new Vector3(0, 0, rotationSpeed);
         //anim = GetComponent<Animator>();
         //anim.SetBool("inAir", true);
-        rotateZ = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //transform.right = arrowRB.velocity;
-        rotateZ += 2.0f;
-
+        
         //life timer
         timer -= Time.deltaTime;
         if(timer <= 0f)
         {
             Destroy(gameObject);
         }
-        transform.Rotate(new Vector3(0f, 0f, rotateZ));
 
     }
 
@@ -43,6 +43,7 @@ public class Arrow : MonoBehaviour
         if (arrowRB.velocity != Vector3.zero && hit == false)
         {
             transform.rotation = Quaternion.LookRotation(arrowRB.velocity);
+
         }
     }
 

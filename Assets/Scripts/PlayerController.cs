@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
             isDrawn = false;
-            Debug.Log(h);
             playerSpeed = 5f;
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
@@ -91,7 +90,6 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Running", false);
             playerSpeed = 2.0f;
-            Debug.Log(h);
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
             {
@@ -111,7 +109,6 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
             isDrawn = false;
-            Debug.Log(v);
             playerSpeed = 5.0f;
             Vector3 move = new Vector3(0, 0, v);
             if (v > 0)
@@ -128,7 +125,6 @@ public class PlayerController : MonoBehaviour
         } else if (Input.GetButton("Vertical"))
         {
             anim.SetBool("Running", false);
-            Debug.Log(v);
             playerSpeed = 2.0f;
             Vector3 move = new Vector3(0, 0, v);
             if (v > 0)

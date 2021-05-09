@@ -22,9 +22,11 @@ public class Target : MonoBehaviour
     {
         if (col.gameObject.tag == "arrow")
         {
-            float linePosX = col.transform.position.x;
-            float linePosY = col.transform.position.y;
-            Debug.Log("X: " + linePosX + "Y: " + linePosY);
+            Vector3 relPos = gameObject.transform.InverseTransformPoint(col.transform.position);
+            float linePosX = col.transform.localPosition.x;
+            float linePosY = col.transform.localPosition.y;
+            Score.AddPoints(relPos);
+            Debug.Log(relPos);
             Debug.Log("Collision with Target"); 
         }
     }

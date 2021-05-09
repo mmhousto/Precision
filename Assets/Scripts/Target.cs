@@ -26,8 +26,6 @@ public class Target : MonoBehaviour
             float linePosX = col.transform.localPosition.x;
             float linePosY = col.transform.localPosition.y;
             Score.AddPoints(relPos);
-            Debug.Log(relPos);
-            Debug.Log("Collision with Target"); 
         }
     }
 }

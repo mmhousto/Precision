@@ -38,8 +38,8 @@ public class Score : MonoBehaviour {
             absY = hitPos.y - 0.1;
             absZ = hitPos.z - 0.1;
         }
-        
 
+        Debug.Log(hitPos);
         if (hitPos == Vector3.zero) {
             Debug.Log("Bullseye");
             score += 100;

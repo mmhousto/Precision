@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
-    private float jumpHeight = 2.0f;
+    private float playerSpeed = 1.0f;
+    private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f; 
     private static Animator anim;
     private bool isdrawn;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
             isDrawn = false;
-            playerSpeed = 5f;
+            playerSpeed = 2f;
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
             {
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         } else if (Input.GetButton("Horizontal"))
         {
             anim.SetBool("Running", false);
-            playerSpeed = 2.0f;
+            playerSpeed = 1.0f;
             Vector3 move = new Vector3(h, 0, 0);
             if (h > 0)
             {
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", true);
             anim.SetBool("Draw", false);
             isDrawn = false;
-            playerSpeed = 5.0f;
+            playerSpeed = 2.0f;
             Vector3 move = new Vector3(0, 0, v);
             if (v > 0)
             {
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
         } else if (Input.GetButton("Vertical"))
         {
             anim.SetBool("Running", false);
-            playerSpeed = 2.0f;
+            playerSpeed = 1.0f;
             Vector3 move = new Vector3(0, 0, v);
             if (v > 0)
             {

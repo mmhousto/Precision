@@ -56,8 +56,7 @@ public class Arrow : MonoBehaviour
         {
             timer = lifeTimer;
         }
-        
-        Debug.Log(collision.collider.tag);
+       
         
     }
 }

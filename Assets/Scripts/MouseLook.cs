@@ -8,6 +8,7 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 1000f;
 
     public Transform playerBody;
+    public Transform head;
 
     float xRotation = 0f;
 
@@ -18,13 +19,25 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        float yaw = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        
+    }
+
+    void LateUpdate()
+    {
+        
+
         float pitch = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= pitch;
-        xRotation = Mathf.Clamp(xRotation, -90f, 55f);
-        
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * yaw);
+        xRotation = Mathf.Clamp(xRotation, -90f, 55f); // clamps min and max rotation
+
+        head.localRotation = Quaternion.Euler(xRotation, -50f, 0f); // rotates head up and down
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // rotates head up and down
+
+        float yaw = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+
+        playerBody.Rotate(Vector3.up * yaw); // rotates player left and right
+
+        //transform.localRotation = head.localRotation;
     }
 }

@@ -40,16 +40,16 @@ public class Shoot : MonoBehaviour {
             
         }
         if (Input.GetMouseButtonUp(0) && PlayerController.isDrawn == true && canFire == true) {
-
+            var pullBack = Mathf.Clamp(shotStrength, 0f, 6f);
+            shotStrength = 0.0f;
             PlayerController.setShot1(); // activates animation
             anim.SetFloat("ShotStrength", shotStrength);
             timer = shotTimer; // reset timer
             GameObject clone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.rotation) as GameObject; // spawns arrow
             Rigidbody rb = clone.GetComponent<Rigidbody>(); // gets Rigidbody of cloned arrow
-            rb.velocity = fpsCam.transform.forward * shootForce * Mathf.Clamp(shotStrength, 0f, 6f); // applies velocity to it in direction facing
+            rb.velocity = fpsCam.transform.forward * shootForce * pullBack; // applies velocity to it in direction facing
             clone.transform.rotation = Quaternion.LookRotation(rb.velocity); // adds arc to arrow (rotates arrow down)
             Physics.IgnoreCollision(clone.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>()); // ignore collision w/ player
-            shotStrength = 0.0f;
             StartCoroutine(EndShot());
 
         }
@@ -57,7 +57,7 @@ public class Shoot : MonoBehaviour {
     }
 
     IEnumerator EndShot() {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.25f);
         PlayerController.setShot0();
 
     }

@@ -40,7 +40,7 @@ public class Shoot : MonoBehaviour {
             
         }
         if (Input.GetMouseButtonUp(0) && PlayerController.isDrawn == true && canFire == true) {
-            var pullBack = Mathf.Clamp(shotStrength, 0f, 6f);
+            var pullBack = Mathf.Clamp(shotStrength, 0f, 4f);
             shotStrength = 0.0f;
             PlayerController.setShot1(); // activates animation
             anim.SetFloat("ShotStrength", shotStrength);

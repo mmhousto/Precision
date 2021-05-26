@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour {
     public Transform arrowSpawn;
     public float shootForce = 10f;
     public Animator anim;
-    private float shotTimer = 1.7f;
+    private float shotTimer = 2f;
     private float timer;
     private bool canFire = true;
     private float shotStrength = 0.0f;
@@ -34,13 +34,13 @@ public class Shoot : MonoBehaviour {
 
         // Shoot Arrow
         if (Input.GetMouseButton(0) && PlayerController.isDrawn == true && canFire == true) {
-            shotStrength += 0.025f;
+            shotStrength += 0.02f;
             anim.SetFloat("ShotStrength", shotStrength);
             Debug.Log(shotStrength);
             
         }
         if (Input.GetMouseButtonUp(0) && PlayerController.isDrawn == true && canFire == true) {
-            var pullBack = Mathf.Clamp(shotStrength, 0f, 4f);
+            var pullBack = Mathf.Clamp(shotStrength, 0f, 5f);
             shotStrength = 0.0f;
             PlayerController.setShot1(); // activates animation
             anim.SetFloat("ShotStrength", shotStrength);
@@ -50,6 +50,7 @@ public class Shoot : MonoBehaviour {
             rb.velocity = fpsCam.transform.forward * shootForce * pullBack; // applies velocity to it in direction facing
             clone.transform.rotation = Quaternion.LookRotation(rb.velocity); // adds arc to arrow (rotates arrow down)
             Physics.IgnoreCollision(clone.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>()); // ignore collision w/ player
+
             StartCoroutine(EndShot());
 
         }

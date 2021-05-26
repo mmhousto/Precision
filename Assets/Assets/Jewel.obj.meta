@@ -3,7 +3,22 @@ guid: 6a3844ad3c26e8e4da05c1a00495b6e3
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glow
+    second: {fileID: 2100000, guid: e4b41ad15c7999c46ad61fa5d1cde949, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: palette
+    second: {fileID: 2100000, guid: 4482aa851e4474d469da6062942a881b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: palette.003
+    second: {fileID: 2100000, guid: 4dcc2aa051cd2a34493219bcf40cdc38, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

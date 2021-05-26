@@ -8,7 +8,7 @@ public class FPSMouseLook : MonoBehaviour
     public float mouseSensitivity = 1000f;
 
     public Transform playerBody;
-    public Transform lArm;
+    public Transform lArm, head;
 
     float xRotation = 0f;
 
@@ -31,8 +31,9 @@ public class FPSMouseLook : MonoBehaviour
         xRotation -= pitch;
         xRotation = Mathf.Clamp(xRotation, -80f, 45f); // clamps min and max rotation
 
-        lArm.localRotation = Quaternion.Euler(xRotation, 50f, 0f); // rotates head up and down
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // rotates head up and down
+        lArm.localRotation = Quaternion.Euler(xRotation, 50f, 0f); // rotates arm up and down
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // rotates camera up and down
+        //head.rotation = Quaternion.Euler(xRotation, 0f, 0f); // rotates head up and down
 
         float yaw = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 

@@ -5,12 +5,10 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     Rigidbody arrowRB;
-    //Animator anim;
+
     private float lifeTimer = 6f;
     private float timer;
     private bool hit;
-    float rotationSpeed = 45;
-    Vector3 eulerAngleVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +16,6 @@ public class Arrow : MonoBehaviour
         timer = lifeTimer;
         arrowRB = GetComponent<Rigidbody>();
         hit = false;
-
-        //Set the angular velocity of the Rigidbody (rotating around the Y axis, 100 deg/sec)
-        eulerAngleVelocity = new Vector3(0, 0, rotationSpeed);
-        //anim = GetComponent<Animator>();
-        //anim.SetBool("inAir", true);
     }
 
     // Update is called once per frame
@@ -38,6 +31,7 @@ public class Arrow : MonoBehaviour
 
     }
 
+    // rotates arrow down to add arc
     void LateUpdate()
     {
         if (arrowRB.velocity != Vector3.zero && hit == false)
@@ -49,11 +43,11 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //anim.SetBool("inAir", false);
-        arrowRB.isKinematic = true;
         hit = true;
         if(collision.collider.tag == "target")
         {
+            //transform.SetParent(collision.gameObject.transform, true); // attach to target.
+            Destroy(gameObject);
             timer = lifeTimer;
         }
        

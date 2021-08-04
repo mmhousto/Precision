@@ -1,0 +1,2 @@
+MainPackage=D:\Morga\Documents\Precision\XboxBuild\build\bin\x64\Release\Precision_1.0.1.0_x64.appx
+SymbolPackage=D:\Morga\Documents\Precision\XboxBuild\build\obj\Precision\x64\Release\Symbols\Precision_1.0.1.0_x64.appxsym

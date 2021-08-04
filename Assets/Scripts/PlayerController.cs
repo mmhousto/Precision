@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveDirection;
     private float horizontal, vertical;
-    private float jumpHeight = 1.0f;
+    private float jumpHeight = 1.5f;
     private float gravityValue = -9.81f;
     private bool groundedPlayer, jump, isAiming, isFP = false;
     private Vector3 playerVelocity;

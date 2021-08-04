@@ -9,6 +9,8 @@ TagManager:
   - projectile
   - FxTemporaire
   - Invisible
+  - interactable
+  - apple
   layers:
   - Default
   - TransparentFX

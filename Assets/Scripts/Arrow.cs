@@ -50,6 +50,14 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject);
             timer = lifeTimer;
         }
+        arrowRB.isKinematic = true;
+        
+        if(collision.collider.tag == "apple")
+        {
+            Debug.Log("Hit APPLE");
+            transform.SetParent(collision.gameObject.transform, true); // attach to target.
+        }
+
        
         
     }

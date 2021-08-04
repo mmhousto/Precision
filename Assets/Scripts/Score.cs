@@ -32,6 +32,11 @@ public class Score : MonoBehaviour {
         scoreLbl.SetText("Score: {0}", score);
     }
 
+    public void AddExtraPoints()
+    {
+        score += 50;
+    }
+
     public static void AddPoints(Vector3 relPos) {
         var hitPos = relPos - center;
 

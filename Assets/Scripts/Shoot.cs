@@ -18,7 +18,7 @@ public class Shoot : MonoBehaviour {
     public static bool canFire = true;
     private float shotStrength = 0.0f;
     private bool pullingBack = false;
-    private bool hasPulledBack = false;
+    private bool hasReleased = false;
 
     
 
@@ -58,13 +58,14 @@ public class Shoot : MonoBehaviour {
     {
         //Check If Pulling Back
         pullingBack = _input.hasPulledBack;
-        if(pullingBack == true)
+        hasReleased = _input.hasReleased;
+
+        if(pullingBack && canFire)
         {
-            hasPulledBack = true;
+            shotStrength += 0.02f;
             
-        } else if (pullingBack == false && canFire == true && hasPulledBack == true)
+        } else if (hasReleased && canFire)
         {
-            hasPulledBack = false;
             var pullBack = Mathf.Clamp(shotStrength, 0f, 5f); // clamps shotStrength if greater than 5
             power.value = shotStrength;
 
@@ -77,9 +78,9 @@ public class Shoot : MonoBehaviour {
             Physics.IgnoreCollision(clone.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>()); // ignore collision w/ player
 
             anim.SetTrigger("Shot");
-        } else
+        } else if (canFire == false)
         {
-            hasPulledBack = false;
+            shotStrength = 0f;
         }
     }
 
@@ -87,13 +88,11 @@ public class Shoot : MonoBehaviour {
     {
         if (pullingBack && canFire)
         {
-            shotStrength += 0.02f;
             anim.SetFloat("ShotStrength", shotStrength);
             power.value = shotStrength;
         }
         else if (canFire == false)
         {
-            shotStrength = 0f;
             anim.SetFloat("ShotStrength", shotStrength);
             power.value = shotStrength;
         }

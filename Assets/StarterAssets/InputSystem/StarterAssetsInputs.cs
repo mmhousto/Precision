@@ -14,6 +14,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool aiming;
 		public bool hasPulledBack;
+		public bool hasReleased;
 		public bool isFP;
 
 		[Header("Movement Settings")]
@@ -57,8 +58,6 @@ namespace StarterAssets
 		public void OnAttack(InputValue value)
 		{
 			AttackInput(value.isPressed);
-
-
 		}
 
 		public void OnSwitch(InputAction.CallbackContext context)
@@ -100,14 +99,20 @@ namespace StarterAssets
         {
 			if (aiming == true)
 			{
-				if (newAttackState == true && Shoot.canFire == true)
+				if (newAttackState == true && Shoot.canFire == true && hasPulledBack == false)
 				{
 					hasPulledBack = true;
+					hasReleased = false;
 				}
-				else
+				else if (newAttackState == true && Shoot.canFire == true && hasPulledBack == true)
 				{
 					hasPulledBack = false;
-				}
+					hasReleased = true;
+				} else
+                {
+					hasPulledBack = false;
+					hasReleased = false;
+                }
 
 			}
 		}

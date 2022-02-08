@@ -13,7 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool aiming;
-		public bool hasPulledBack;
+		public bool isPullingBack;
 		public bool hasReleased;
 		public bool isFP;
 
@@ -25,6 +25,15 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 #endif
+
+        private void Update()
+        {
+			if (Shoot.canFire == false)
+			{
+				isPullingBack = false;
+				hasReleased = false;
+			}
+		}
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         public void OnMove(InputValue value)
@@ -99,20 +108,16 @@ namespace StarterAssets
         {
 			if (aiming == true)
 			{
-				if (newAttackState == true && Shoot.canFire == true && hasPulledBack == false)
+				if (Shoot.canFire == true && isPullingBack == false)
 				{
-					hasPulledBack = true;
+					isPullingBack = true;
 					hasReleased = false;
 				}
-				else if (newAttackState == true && Shoot.canFire == true && hasPulledBack == true)
+				else if (Shoot.canFire == true && isPullingBack == true)
 				{
-					hasPulledBack = false;
+					isPullingBack = false;
 					hasReleased = true;
-				} else
-                {
-					hasPulledBack = false;
-					hasReleased = false;
-                }
+				}
 
 			}
 		}

@@ -36,40 +36,40 @@ namespace StarterAssets
 		}
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-        public void OnMove(InputValue value)
+        public void Move(InputAction.CallbackContext context)
 		{
-			MoveInput(value.Get<Vector2>());
+			MoveInput(context.ReadValue<Vector2>());
 		}
 
-		public void OnLook(InputValue value)
+		public void Look(InputAction.CallbackContext context)
 		{
 			if(cursorInputForLook)
 			{
-				LookInput(value.Get<Vector2>());
+				LookInput(context.ReadValue<Vector2>());
 			}
 		}
 
-		public void OnJump(InputValue value)
+		public void Jump(InputAction.CallbackContext context)
 		{
-			JumpInput(value.isPressed);
+			JumpInput(context.ReadValueAsButton());
 		}
 
-		public void OnSprint(InputValue value)
+		public void Sprint(InputAction.CallbackContext context)
 		{
-			SprintInput(value.isPressed);
+			SprintInput(context.ReadValueAsButton());
 		}
 
-		public void OnAim(InputValue value)
+		public void Aim(InputAction.CallbackContext context)
 		{
-			AimInput(value.isPressed);
+			AimInput(context.ReadValueAsButton());
 		}
 
-		public void OnAttack(InputValue value)
+		public void Attack(InputAction.CallbackContext context)
 		{
-			AttackInput(value.isPressed);
+			AttackInput(context.ReadValueAsButton());
 		}
 
-		public void OnSwitch(InputAction.CallbackContext context)
+		public void Switch(InputAction.CallbackContext context)
 		{
 			SwitchInput();
 		}
@@ -104,22 +104,9 @@ namespace StarterAssets
 			aiming = isDrawn;
 		}
 
-		public void AttackInput(bool newAttackState)
+		public void AttackInput(bool isPulling)
         {
-			if (aiming == true)
-			{
-				if (Shoot.canFire == true && isPullingBack == false)
-				{
-					isPullingBack = true;
-					hasReleased = false;
-				}
-				else if (Shoot.canFire == true && isPullingBack == true)
-				{
-					isPullingBack = false;
-					hasReleased = true;
-				}
-
-			}
+			isPullingBack = isPulling;
 		}
 
 		// switches to first person view/ vice-versa

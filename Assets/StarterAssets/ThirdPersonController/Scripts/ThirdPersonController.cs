@@ -311,14 +311,11 @@ namespace StarterAssets
 
 		private void CheckIfAiming()
         {
-			bool prevValue = IsAiming;
 			IsAiming = _input.aiming;
-			if(IsAiming && prevValue != IsAiming)
-            {
-				reticle.SetActive(IsAiming);
-				CameraManager.Instance.UpdateAimCamera(IsAiming);
-				_animator.SetBool(_animIDDraw, IsAiming);
-			}
+
+			reticle.SetActive(IsAiming);
+			CameraManager.Instance.UpdateAimCamera(IsAiming);
+			_animator.SetBool(_animIDDraw, IsAiming);
 			
 		}
 

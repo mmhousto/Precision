@@ -17,8 +17,10 @@ public class Shoot : MonoBehaviour {
     private float timer;
     public static bool canFire = true;
     private float shotStrength = 0.0f;
+    private bool aiming = false;
     private bool pullingBack = false;
     private bool hasReleased = false;
+    private bool startedPullingBack = false;
     private Camera cam;
 
     
@@ -34,6 +36,7 @@ public class Shoot : MonoBehaviour {
     void Update()
     {
         CheckIfCanFire();
+
         Fire();
 
 
@@ -52,21 +55,27 @@ public class Shoot : MonoBehaviour {
         else
         {
             canFire = false;
-
+            shotStrength = 0f;
+            startedPullingBack = false;
         }
     }
 
     private void Fire()
     {
-        //Check If Pulling Back
+        aiming = _input.aiming;
+        if (!aiming) { return; }
         pullingBack = _input.isPullingBack;
-        hasReleased = _input.hasReleased;
 
-        if(pullingBack && canFire && hasReleased == false)
+        if (pullingBack && startedPullingBack == false)
+        {
+            startedPullingBack = true;
+        }
+
+        if(pullingBack && canFire && startedPullingBack)
         {
             shotStrength += 0.02f;
             
-        } else if (hasReleased && canFire && pullingBack == false)
+        } else if (pullingBack == false && canFire && startedPullingBack)
         {
             var pullBack = Mathf.Clamp(shotStrength, 0f, 5f); // clamps shotStrength if greater than 5
             power.value = shotStrength;
@@ -80,13 +89,9 @@ public class Shoot : MonoBehaviour {
             Physics.IgnoreCollision(clone.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>()); // ignore collision w/ player
 
             anim.SetTrigger("Shot");
-            hasReleased = false;
-        } else if (canFire == false)
-        {
-            shotStrength = 0f;
-            hasReleased = false;
-            pullingBack = false;
+            startedPullingBack = false;
         }
+
     }
 
     private void AnimatePullBack()

@@ -54,6 +54,8 @@ namespace StarterAssets
 		[Header("Cinemachine")]
 		[Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
 		public GameObject CinemachineCameraTarget;
+		[Tooltip("The body part to move up and down with camera when aiming.")]
+		public GameObject spine;
 		[Tooltip("How far in degrees can you move the camera up")]
 		public float TopClamp = 70.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
@@ -130,6 +132,7 @@ namespace StarterAssets
 			GroundedCheck();
 			CheckIfAiming();
 			Move();
+			
 		}
 
 		private void LateUpdate()
@@ -177,6 +180,12 @@ namespace StarterAssets
 
 			// Cinemachine will follow this target
 			CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride, _cinemachineTargetYaw, 0.0f);
+
+            if (IsAiming)
+            {
+				gameObject.transform.rotation = Quaternion.Euler(0.0f, _cinemachineTargetYaw, 0.0f);
+				spine.transform.Rotate(Vector3.forward, _cinemachineTargetPitch);
+			}
 		}
 
 		private void Move()
@@ -220,10 +229,14 @@ namespace StarterAssets
 			if (_input.move != Vector2.zero)
 			{
 				_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-				float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+				if(IsAiming == false)
+                {
+					float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
-				// rotate to face input direction relative to camera position
-				transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+					// rotate to face input direction relative to camera position
+					transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+				}
+				
 			}
 
 

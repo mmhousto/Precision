@@ -22,6 +22,7 @@ public class Shoot : MonoBehaviour {
     private bool hasReleased = false;
     private bool startedPullingBack = false;
     private Camera cam;
+    private Cinemachine.CinemachineImpulseSource source;
 
     
 
@@ -30,6 +31,7 @@ public class Shoot : MonoBehaviour {
         timer = 0f;
         _input = GetComponent<StarterAssetsInputs>();
         cam = Camera.main;
+        source = GetComponent<Cinemachine.CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -82,11 +84,28 @@ public class Shoot : MonoBehaviour {
 
             timer = shotTimer; // reset timer to reset canFire
 
+            Ray ray = new Ray(arrowSpawn.position, cam.transform.forward);
+            RaycastHit hit;
+            Vector3 targetPoint;
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                targetPoint = hit.point;
+            }else
+            {
+                targetPoint = ray.GetPoint(90f);
+            }
+
+            Vector3 directionWithoutSpread = targetPoint - arrowSpawn.position;
+
             GameObject clone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.rotation) as GameObject; // spawns arrow
             Rigidbody rb = clone.GetComponent<Rigidbody>(); // gets Rigidbody of cloned arrow
-            rb.velocity = cam.transform.forward * shootForce * pullBack; // applies velocity to it in direction facing
+            //rb.velocity = arrowSpawn.forward * shootForce * pullBack; // applies velocity to it in direction facing
+            rb.AddForce(directionWithoutSpread.normalized * shootForce * pullBack, ForceMode.Impulse);
             clone.transform.rotation = Quaternion.LookRotation(rb.velocity); // adds arc to arrow (rotates arrow down)
             Physics.IgnoreCollision(clone.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>()); // ignore collision w/ player
+
+            source.GenerateImpulse(cam.transform.forward);
 
             anim.SetTrigger("Shot");
             startedPullingBack = false;
@@ -112,4 +131,5 @@ public class Shoot : MonoBehaviour {
     {
         AnimatePullBack();
     }
+
 }

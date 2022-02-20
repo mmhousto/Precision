@@ -46,11 +46,10 @@ public class Arrow : MonoBehaviour
         hit = true;
         if(collision.collider.tag == "target")
         {
-            //transform.SetParent(collision.gameObject.transform, true); // attach to target.
-            Destroy(gameObject);
-            timer = lifeTimer;
+            transform.SetParent(collision.gameObject.transform, true); // attach to target.
         }
         arrowRB.isKinematic = true;
+        arrowRB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         
         if(collision.collider.tag == "apple")
         {

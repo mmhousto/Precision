@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5969901aa40942499363f92e3787110, type: 3}
+  m_Name: PlayerArmature Raw Signal
+  m_EditorClassIdentifier: 
+  m_XCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1574835
+      value: 0.0021923166
+      inSlope: -0.012107028
+      outSlope: -0.012107028
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.9355573
+    - serializedVersion: 3
+      time: 0.3148523
+      value: -0.0010654852
+      inSlope: -0.050032776
+      outSlope: -0.050032776
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.52720165
+    - serializedVersion: 3
+      time: 0.51856023
+      value: -0.0010164124
+      inSlope: 0.03852062
+      outSlope: 0.03852062
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1463241
+    - serializedVersion: 3
+      time: 0.9999327
+      value: 0.000014675956
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_YCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.00028714724
+      value: -0.009035289
+      inSlope: 0.091816485
+      outSlope: 0.091816485
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.111072235
+      value: 0.0011366084
+      inSlope: -0.00018441517
+      outSlope: -0.00018441517
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.22187601
+    - serializedVersion: 3
+      time: 0.18667749
+      value: -0.0025532255
+      inSlope: -0.00944487
+      outSlope: -0.00944487
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29680237
+      value: 0.000741072
+      inSlope: -0.018868454
+      outSlope: -0.018868454
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.9571897
+    - serializedVersion: 3
+      time: 0.42284286
+      value: -0.005790334
+      inSlope: -0.056507636
+      outSlope: -0.056507636
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5344651
+      value: 0.000037366524
+      inSlope: 0.02902486
+      outSlope: 0.02902486
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.19792522
+    - serializedVersion: 3
+      time: 1.0020354
+      value: -0.000025121844
+      inSlope: -0.00013364486
+      outSlope: -0.00013364486
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_ZCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.000001648441
+      value: 0.022288268
+      inSlope: -0.009385232
+      outSlope: -0.009385232
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.18044975
+    - serializedVersion: 3
+      time: 0.9935913
+      value: 0.009952545
+      inSlope: -0.012415309
+      outSlope: -0.012415309
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
